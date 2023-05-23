@@ -1,18 +1,20 @@
-import pandas as pd
-from sqlalchemy import Table, Column, Integer, String, MetaData, Float
+import pandas as pd 
+from sqlalchemy import Table, Column, Integer, String, MetaData, Float # https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_core_creating_table.htm
 from sqlalchemy.dialects import postgresql
-import os
+import os 
 
 class Load():
+
     @staticmethod
     def load(
-        df:pd.DataFrame,
-        load_method:str="upsert",
-        target_file_directory:str=None,
-        target_file_name:str=None,
-        target_database_engine=None,
-        target_table_name:str=None
-    )->None:
+            df: pd.DataFrame, 
+            load_target:str, 
+            load_method:str="upsert",
+            target_file_directory:str=None,
+            target_file_name:str=None,
+            target_database_engine=None,
+            target_table_name:str=None
+        )->None:
         """
         Load dataframe to either a file or a database. 
         - df: pandas dataframe to load.  
@@ -23,7 +25,7 @@ class Load():
         - target_database_engine: SQLAlchemy engine for the target database. 
         - target_table_name: name of the SQL table to create and/or upsert data to. 
         """
-          
+        
         if load_target == "file": 
             if load_method == "upsert": 
                 # upsert (update and insert) data to a csv file 
